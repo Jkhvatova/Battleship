@@ -1,8 +1,9 @@
 
-export enum Type {
+export enum RequestType {
   REG = "reg",
   CREATE_ROOM = "create_room",
   UPDATE_ROOM = "update_room",
+  UPDATE_WINNERS = "update_winners",
   ADD_USER = "add_user_to_room",
   ADD_SHIPS = "add_ships",
   CREATE = "create_game",
@@ -13,52 +14,62 @@ export enum Type {
 }
 const ID = 0;
 
+export type UserData = {
+  name: string;
+  index: number;
+  error?: boolean;
+  errorText?: string;
+}
 export type Player = {
-  type: Type;
-  data: {
-    name: string;
-    index: number;
-    error?: boolean;
-    errorText?: string;
-  };
-  id: typeof ID;
-}
-
-export type UpdateWInners = {
-  type: Type;
-  data:  [
-    {
-        name: string;
-        wins: string;
-    }
-],
-id: typeof ID;
-}
-
-export type CreateRoom =  {
-  type: Type;
+  type: RequestType;
   data: string;
   id: typeof ID;
 }
+
+// export type UpdateWinners = {
+//   type: RequestType;
+//   data:  [
+//     {
+//         name: string;
+//         wins: number;
+//     }
+// ],
+// id: typeof ID;
+// }
+export type UpdateWinners = {
+  type: RequestType;
+  data:  string,
+id: typeof ID;
+}
+export type CreateRoom =  {
+  type: RequestType;
+  data: string;
+  id: typeof ID;
+}
+// export type UpdateRoom =  {
+//   type: RequestType;
+//   data:
+//       [
+//           {
+//               roomId: number;
+//               roomUsers:
+//                   [
+//                       {
+//                           name: string;
+//                           index: number;
+//                       }
+//                   ],
+//           },
+//       ],
+//   id: typeof ID;
+// }
 export type UpdateRoom =  {
-  type: Type;
-  data:
-      [
-          {
-              roomId: number;
-              roomUsers:
-                  [
-                      {
-                          name: string;
-                          index: number;
-                      }
-                  ],
-          },
-      ],
+  type: RequestType;
+  data: string,
   id: typeof ID;
 }
 export type AddUser =  {
-  type: Type;
+  type: RequestType;
   data:
   {
       indexRoom: number;
@@ -67,7 +78,7 @@ export type AddUser =  {
 }
 
 export type CreateGame =  {
-  type: Type;
+  type: RequestType;
   data:   {
     idGame: number;
     idPlayer: number;
@@ -75,7 +86,7 @@ export type CreateGame =  {
   id: typeof ID;
 }
 export type StartGame =  {
-  type: Type;
+  type: RequestType;
   data:   {
     ships:
         [
@@ -94,7 +105,7 @@ export type StartGame =  {
 id: typeof ID;
 }
 export type FinishGame =  {
-  type: Type;
+  type: RequestType;
   data:   {
     winPlayer: number;
 },
@@ -102,7 +113,7 @@ export type FinishGame =  {
 }
 // game process
 export type AddShips =  {
-  type: Type;
+  type: RequestType;
   data:   {
     gameId: number;
     ships:
@@ -123,7 +134,7 @@ export type AddShips =  {
 }
 
 export type SendAttack =  {
-  type: Type;
+  type: RequestType;
   data:   {
     gameId: number;
     x: number;
@@ -134,7 +145,7 @@ export type SendAttack =  {
 }
 
 export type AttackFeedback =  {
-  type: Type;
+  type: RequestType;
   data:   {
     position:
     {
@@ -147,7 +158,7 @@ export type AttackFeedback =  {
   id: typeof ID;
 }
 export type RandomAttack =  {
-  type: Type;
+  type: RequestType;
   data:   {
     gameId: number;
     indexPlayer: number;
@@ -156,7 +167,7 @@ export type RandomAttack =  {
 }
 
 export type SendPlayerTurn =  {
-  type: Type;
+  type: RequestType;
   data:   {
     currentPlayer: number;
 },

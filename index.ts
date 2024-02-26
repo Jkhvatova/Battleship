@@ -1,11 +1,16 @@
 import { httpServer } from "./src/http_server/index.ts";
 import { wsServer } from "./src/ws_server/index.ts";
 
-const HTTP_PORT = 8181;
+const HTTP_PORT = 8183;
 
 console.log(`Start static http server on the ${HTTP_PORT} port!`);
-httpServer.listen(HTTP_PORT);
+httpServer.listen(HTTP_PORT, () => {
+  console.log('HTTP server is listening on port ' + HTTP_PORT);
+});
 
+wsServer.on('listening', () => {
+  console.log('WebSocket server is listening');
+});
 function shutdown() {
   wsServer.close(() => {
     console.log('WebSocket server closed');
