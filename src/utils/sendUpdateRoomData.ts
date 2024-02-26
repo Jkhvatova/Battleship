@@ -1,21 +1,21 @@
-import { RequestType, UpdateRoom } from '../types/types';
+import { RequestType, UpdateRoom, UpdatedRoomData, WebSocketType } from '../types/types';
 
-export function sendUpdateRoomData(ws: any, data) {
-  const updateRoomData = [
+export function sendUpdateRoomData(ws: WebSocketType, data: string, id: number): void {
+  const roomData: UpdatedRoomData = [
     {
-        roomId: 1,
+        roomId: id,
         roomUsers:
             [
                 {
-                    name: "userName",
+                  name: JSON.parse(data).name,
                     index: 0,
-                }
+                },
             ],
     },
 ]
 const updateRoomMessage: UpdateRoom = {
   type: RequestType.UPDATE_ROOM,
-  data:  JSON.stringify(updateRoomData),
+  data:  JSON.stringify(roomData),
   id: 0,
 };
 ws.send(JSON.stringify(updateRoomMessage));

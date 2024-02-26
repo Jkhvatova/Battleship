@@ -1,9 +1,9 @@
-import { RequestType, UpdateWinners } from '../types/types';
+import { RequestType, UpdateWinners, WebSocketType, Winner } from '../types/types';
 
-export function sendUpdateWinnersData(ws: any, data) {
-  const updateWinnersData = [
+export function sendUpdateWinnersData(ws: WebSocketType, data: string): void {
+  const updateWinnersData: Winner[] = [
     {
-        name: "userName",
+        name: JSON.parse(data).name,
         wins: 0,
     }
 ]

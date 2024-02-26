@@ -10,7 +10,8 @@ export enum RequestType {
   START = "start_game",
   ATTACK = "attack",
   RANDOM_ATTACK = "randomAttack",
-  FINISH = "finish"
+  FINISH = "finish",
+  SINGLE = "single_play"
 }
 const ID = 0;
 
@@ -25,17 +26,10 @@ export type Player = {
   data: string;
   id: typeof ID;
 }
-
-// export type UpdateWinners = {
-//   type: RequestType;
-//   data:  [
-//     {
-//         name: string;
-//         wins: number;
-//     }
-// ],
-// id: typeof ID;
-// }
+export type Winner = {
+        name: string;
+        wins: number;
+}
 export type UpdateWinners = {
   type: RequestType;
   data:  string,
@@ -46,23 +40,20 @@ export type CreateRoom =  {
   data: string;
   id: typeof ID;
 }
-// export type UpdateRoom =  {
-//   type: RequestType;
-//   data:
-//       [
-//           {
-//               roomId: number;
-//               roomUsers:
-//                   [
-//                       {
-//                           name: string;
-//                           index: number;
-//                       }
-//                   ],
-//           },
-//       ],
-//   id: typeof ID;
-// }
+
+export type UpdatedRoomData = [
+          {
+              roomId: number;
+              roomUsers:
+                  [
+                      {
+                          name: string;
+                          index: number;
+                      }
+                  ],
+          },
+      ];
+
 export type UpdateRoom =  {
   type: RequestType;
   data: string,
@@ -172,4 +163,8 @@ export type SendPlayerTurn =  {
     currentPlayer: number;
 },
   id: typeof ID;
+}
+
+export type WebSocketType = {
+  send(data: string): void;
 }

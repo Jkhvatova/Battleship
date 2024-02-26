@@ -3,7 +3,7 @@ import { Player, RequestType } from '../types/types';
 
 export function sendUserData(ws: any, data) {
   const newUserData = {
-    name: "IsUserName",
+    name: JSON.parse(data).name,
     index: 1,
     error: false,
     errorText: ''
